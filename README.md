@@ -179,6 +179,38 @@ ollama pull nomic-embed-text
 
 ---
 
+## 📊 Evaluation Report
+
+### Evaluation Setup
+
+The system was evaluated using a sample legal contract (10–20 pages). Three representative contract-related queries were tested:
+
+1. What is the termination clause?
+2. What are the payment terms?
+3. What is the governing law?
+
+Each query was tested for retrieval relevance, faithfulness to context, citation accuracy, and response latency.
+
+### Metrics
+
+| Metric | Description | Observation |
+|---|---|---|
+| Retrieval Quality | Top-4 semantic similarity via FAISS | Relevant clauses retrieved in most cases |
+| Faithfulness | Answers restricted to retrieved context | No hallucinated external facts observed |
+| Citation Accuracy | Each chunk includes filename + page | Correct page references returned |
+| Latency | End-to-end response time | ~2–5 seconds (OpenAI backend) |
+| Summarization Quality | Structured output format | Clear clause extraction and risk identification |
+
+### Limitations
+
+- Large contracts (>100 pages) may increase embedding time.
+- Retrieval depends on chunk size and embedding quality.
+- Similarity threshold is not dynamically optimized.
+- Legal reasoning is extractive, not interpretive.
+- Not a substitute for professional legal advice.
+
+---
+
 ## 📌 Disclaimer
 
 This tool is for educational purposes only and does not constitute legal advice.
