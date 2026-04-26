@@ -55,6 +55,8 @@ docker compose up --build
    - ⚙️ API Docs: http://localhost:8000/docs
    - 🧪 Playground: http://localhost:8000/chain/playground
 
+---
+
 ## ⚙️ Ollama Setup (Local LLM)
 
 To use the local fallback, ensure Ollama is running on your host machine:
@@ -71,6 +73,8 @@ ollama pull nomic-embed-text
 - `OLLAMA_ORIGINS=*`
 (Restart Ollama after setting these)
 
+---
+
 ## 🧠 Architecture Flow
 
 ```bash
@@ -82,11 +86,15 @@ User (Browser) → Port 8000 (FastAPI)
                   └── Connection → host.docker.internal:11434 (Ollama Host)
 ```
 
+---
+
 ## 🔎 Why this Architecture?
 
 - Zero-Config UI: No need to manage two terminal windows.
 - Scalability: The FastAPI backend remains accessible for external API calls while serving the UI.
 - Environment Isolation: Docker ensures that PDF parsing and FAISS indexing work consistently across all operating systems.
+
+---
 
 ## 🧰 Prerequisites
 
