@@ -1,32 +1,15 @@
-# ─────────────────────────────────────────────────────────────────────────────
-# Smart Contract Assistant — Python Dependencies
-# Install with: pip install -r requirements.txt
-# ─────────────────────────────────────────────────────────────────────────────
-
-# ── Web framework & microservices ─────────────────────────────────────────────
-fastapi>=0.110.0
-uvicorn[standard]>=0.29.0
-langserve[all]>=0.2.0       # Adds /chain/playground UI and streaming support
-
-# ── LangChain ecosystem ───────────────────────────────────────────────────────
-langchain>=0.2.0
-langchain-core>=0.2.0
-langchain-openai>=0.1.0     # ChatOpenAI + OpenAIEmbeddings
-langchain-community>=0.2.0  # FAISS vector store, doc loaders
-
-# ── Vector store ──────────────────────────────────────────────────────────────
-faiss-cpu>=1.8.0            # Use faiss-gpu if you have CUDA
-
-# ── Document parsing ──────────────────────────────────────────────────────────
-pymupdf>=1.24.0             # PDF loader (fast, layout-aware)
-pdfplumber>=0.11.0          # Alternative PDF parser (optional, good for tables)
-python-docx>=1.1.0          # DOCX reading
-docx2txt>=0.8               # LangChain Docx2txtLoader dependency
-
-# ── Frontend ──────────────────────────────────────────────────────────────────
-gradio>=4.29.0
-
-# ── Utilities ─────────────────────────────────────────────────────────────────
-python-dotenv>=1.0.0        # Load .env file for API keys
-requests>=2.31.0            # HTTP calls from client_ui → server
-tiktoken>=0.7.0             # Token counting (used internally by LangChain)
+fastapi
+uvicorn
+python-dotenv
+gradio
+requests
+langchain
+langchain-openai
+langchain-community
+langchain-text-splitters
+PyMuPDF
+docx2txt
+faiss-cpu
+langserve
+sse-starlette
+langchain-ollama
