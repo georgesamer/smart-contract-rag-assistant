@@ -11,6 +11,9 @@ LLM / Embeddings backend:
   - Otherwise → Ollama (llama3.1 + nomic-embed-text)  ← requires `ollama serve` running locally
 """
 
+import gradio as gr
+from fastapi import FastAPI
+
 import os
 import uuid
 import tempfile
@@ -19,6 +22,8 @@ from typing import List
 
 # ── Environment ──────────────────────────────────────────────────────────────
 from dotenv import load_dotenv
+
+from client_ui import build_ui
 load_dotenv()  # Loads OPENAI_API_KEY (and others) from .env file
 
 # ── FastAPI & LangServe ───────────────────────────────────────────────────────
@@ -45,7 +50,7 @@ OPENAI_API_KEY = "" #os.getenv("OPENAI_API_KEY", "").strip()
 USE_OPENAI = bool(OPENAI_API_KEY)
 
 # Ollama connection settings (override via env vars if needed)
-OLLAMA_BASE_URL  = os.getenv("OLLAMA_BASE_URL", "http://localhost:11434")
+OLLAMA_BASE_URL  = os.getenv("OLLAMA_BASE_URL", "http://host.docker.internal:11434")
 OLLAMA_LLM_MODEL = os.getenv("OLLAMA_LLM_MODEL", "llama3.1:latest")
 OLLAMA_EMBED_MODEL = os.getenv("OLLAMA_EMBED_MODEL", "nomic-embed-text:latest")
 
@@ -415,6 +420,9 @@ add_routes(
 # ─────────────────────────────────────────────────────────────────────────────
 # Entry point
 # ─────────────────────────────────────────────────────────────────────────────
+app = gr.mount_gradio_app(app, build_ui(), path="/")
+
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run("server:app", host="127.0.0.1", port=8000, reload=True)
+    # الآن سنشغل سيرفر واحد فقط على المنفذ 8000 وهو سيحمل الواجهة والـ API معاً
+    uvicorn.run(app, host="0.0.0.0", port=8000)
