@@ -257,7 +257,7 @@ def build_ui():
 if __name__ == "__main__":
     ui = build_ui()
     ui.launch(
-        server_name="127.0.0.1",  # التغيير هنا
+        server_name="0.0.0.0",  # التغيير الجوهري هنا
         server_port=7860,
         share=False,
     )
